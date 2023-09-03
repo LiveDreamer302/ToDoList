@@ -70,7 +70,7 @@ const AuthComponent: React.FC<AuthProps> = ({onLogin, onRegister}) => {
                     />
                 </Form.Group>
 
-                <FormGroup className="m-2">
+                <FormGroup className="mt-2 me-2">
                     <Button className="me-2" variant="primary" type="submit">
                         {isLoginMode ? 'Войти' : 'Зарегистрироваться'}
                     </Button>
