@@ -12,6 +12,8 @@ const AuthComponent: React.FC<AuthProps> = ({onLogin, onRegister}) => {
     const [password, setPassword] = useState('');
     const [isLoginMode, setIsLoginMode] = useState(true);
 
+    const isLatinLetters = (input:string) => /^[a-zA-Z0-9]+$/.test(input);
+
     const handleClickIsLoginMode = () => {
         setIsLoginMode(!isLoginMode);
         setLogin("")
@@ -32,18 +34,17 @@ const AuthComponent: React.FC<AuthProps> = ({onLogin, onRegister}) => {
         <Container className="w-25 mt-5 p-3 border rounded-3">
             <h2>{isLoginMode ? 'Вход' : 'Регистрация'}</h2>
             <Form onSubmit={handleAuthSubmit}>
-                <Form.Group controlId="formBasicEmail">
+                {!isLoginMode && <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email адрес</Form.Label>
                     <Form.Control
                         type="email"
                         placeholder="Введите email"
                         autoComplete="email"
-
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
-                </Form.Group>
+                </Form.Group>}
 
                 <Form.Group controlId="formBasicLogin">
                     <Form.Label>Логин</Form.Label>
@@ -52,10 +53,16 @@ const AuthComponent: React.FC<AuthProps> = ({onLogin, onRegister}) => {
                         placeholder="Введите логин"
                         autoComplete="login"
                         value={login}
-                        onChange={(e) => setLogin(e.target.value)}
+                        onChange={(e) => {
+                            const inputValue = e.target.value;
+                            if (isLatinLetters(inputValue) || inputValue === '') {
+                                setLogin(inputValue);
+                            }
+                        }}
                         required
                     />
                 </Form.Group>
+
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Пароль</Form.Label>
