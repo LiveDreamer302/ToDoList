@@ -1,0 +1,15 @@
+/* Общий стиль скроллбара */
+::-webkit-scrollbar {
+    width: 10px; /* Ширина скроллбара */
+}
+
+/* Стиль ползунка скроллбара */
+::-webkit-scrollbar-thumb {
+    background-color: #333; /* Цвет ползунка */
+    border-radius: 5px; /* Скругление углов ползунка */
+}
+
+/* Стиль трека скроллбара (фон) */
+::-webkit-scrollbar-track {
+    background-color: #666; /* Цвет трека */
+}
