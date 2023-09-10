@@ -9,6 +9,14 @@ public static class ApplicationServicesExtensions
     {
         services.AddScoped<ITokenService, TokenService>();
 
+        services.AddCors(opt =>
+        {
+            opt.AddPolicy("CorsPolicy", policy =>
+            {
+                policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:300");
+            });
+        });
+
         return services;
     }
 }

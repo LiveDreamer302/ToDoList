@@ -29,6 +29,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseAuthentication();
+
+app.UseCors("CorsPolicy");
 app.UseAuthorization();
 
 app.MapControllers();
