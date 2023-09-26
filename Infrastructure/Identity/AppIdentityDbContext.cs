@@ -1,4 +1,6 @@
 ﻿using Core.Entities.Identity;
+using Core.Entities.Rooms;
+using Core.Entities.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,8 +12,11 @@ public class AppIdentityDbContext : IdentityDbContext<AppUser>
     {
     }
 
+    public DbSet<Room> Rooms { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        builder.Entity<Room>()
+            .HasKey(x => x.Id);
         base.OnModelCreating(builder);
     }
 }

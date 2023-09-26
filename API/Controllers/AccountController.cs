@@ -1,4 +1,5 @@
-﻿using API.Dtos;
+﻿using System.Security.Claims;
+using API.Dtos;
 using API.Errors;
 using API.Extensions;
 using Core.Entities.Identity;
@@ -85,6 +86,8 @@ public class AccountController : BaseApiController
         var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
             
         if (!result.Succeeded) return Unauthorized(new ApiResponse(401));
+        
+
 
         return new UserDto
         {
