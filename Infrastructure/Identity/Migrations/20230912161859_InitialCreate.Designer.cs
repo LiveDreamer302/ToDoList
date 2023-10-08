@@ -3,6 +3,7 @@ using System;
 using Infrastructure.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Identity.Migrations
 {
     [DbContext(typeof(AppIdentityDbContext))]
-    partial class AppIdentityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230912161859_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.10");
@@ -113,36 +116,6 @@ namespace Infrastructure.Identity.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Rooms");
-                });
-
-            modelBuilder.Entity("Core.Entities.Tasks.RoomTask", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateOnly>("DeadLine")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsDone")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("RoomId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoomId");
-
-                    b.ToTable("Tasks");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -288,15 +261,6 @@ namespace Infrastructure.Identity.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Core.Entities.Tasks.RoomTask", b =>
-                {
-                    b.HasOne("Core.Entities.Rooms.Room", "Room")
-                        .WithMany("TasksList")
-                        .HasForeignKey("RoomId");
-
-                    b.Navigation("Room");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -346,11 +310,6 @@ namespace Infrastructure.Identity.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Core.Entities.Rooms.Room", b =>
-                {
-                    b.Navigation("TasksList");
                 });
 #pragma warning restore 612, 618
         }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Identity.Migrations
 {
     /// <inheritdoc />
-    public partial class IdentityInitial : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -49,6 +49,19 @@ namespace Infrastructure.Identity.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Rooms",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Rooms", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -157,6 +170,35 @@ namespace Infrastructure.Identity.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "AppUserRoom",
+                columns: table => new
+                {
+                    AppUsersId = table.Column<string>(type: "TEXT", nullable: false),
+                    RoomsId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUserRoom", x => new { x.AppUsersId, x.RoomsId });
+                    table.ForeignKey(
+                        name: "FK_AppUserRoom_AspNetUsers_AppUsersId",
+                        column: x => x.AppUsersId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AppUserRoom_Rooms_RoomsId",
+                        column: x => x.RoomsId,
+                        principalTable: "Rooms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppUserRoom_RoomsId",
+                table: "AppUserRoom",
+                column: "RoomsId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -199,6 +241,9 @@ namespace Infrastructure.Identity.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "AppUserRoom");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -212,6 +257,9 @@ namespace Infrastructure.Identity.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Rooms");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

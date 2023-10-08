@@ -8,7 +8,7 @@ public static class ApplicationServicesExtensions
     public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
     {
         services.AddScoped<ITokenService, TokenService>();
-
+        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         services.AddCors(opt =>
         {
             opt.AddPolicy("CorsPolicy", policy =>

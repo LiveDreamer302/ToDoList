@@ -11,14 +11,29 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Identity.Migrations
 {
     [DbContext(typeof(AppIdentityDbContext))]
-    [Migration("20230905163911_IdentityInitial")]
-    partial class IdentityInitial
+    [Migration("20230912165539_AddedTasks")]
+    partial class AddedTasks
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.10");
+
+            modelBuilder.Entity("AppUserRoom", b =>
+                {
+                    b.Property<string>("AppUsersId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("RoomsId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("AppUsersId", "RoomsId");
+
+                    b.HasIndex("RoomsId");
+
+                    b.ToTable("AppUserRoom");
+                });
 
             modelBuilder.Entity("Core.Entities.Identity.AppUser", b =>
                 {
@@ -86,6 +101,51 @@ namespace Infrastructure.Identity.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("Core.Entities.Rooms.Room", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Rooms");
+                });
+
+            modelBuilder.Entity("Core.Entities.Tasks.RoomTask", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateOnly>("DeadLine")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsDone")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("RoomTask");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -216,6 +276,32 @@ namespace Infrastructure.Identity.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("AppUserRoom", b =>
+                {
+                    b.HasOne("Core.Entities.Identity.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("AppUsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Rooms.Room", null)
+                        .WithMany()
+                        .HasForeignKey("RoomsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Core.Entities.Tasks.RoomTask", b =>
+                {
+                    b.HasOne("Core.Entities.Rooms.Room", "Room")
+                        .WithMany("TasksList")
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Room");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -265,6 +351,11 @@ namespace Infrastructure.Identity.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Core.Entities.Rooms.Room", b =>
+                {
+                    b.Navigation("TasksList");
                 });
 #pragma warning restore 612, 618
         }
