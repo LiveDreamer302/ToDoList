@@ -29,7 +29,7 @@ public class RoomsController : BaseApiController
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Room>>> GetRoomsAsync()
+    public async Task<ActionResult<IEnumerable<Room>>> GetRoomsAsync() // Returns all rooms from database
     {
         var room = await _context.Rooms
             .Include(r => r.AppUsers)
@@ -47,7 +47,7 @@ public class RoomsController : BaseApiController
     }
 
     [HttpGet("/room/{roomId}")]
-    public async Task<ActionResult<Room>> GetRoomByIdAsync(int roomId)
+    public async Task<ActionResult<Room>> GetRoomByIdAsync(int roomId) // Returns a room by id. Will be usefull when entering in an specific room to view tasks
     {
         var room = await _context.Rooms
             .Where(x => x.Id == roomId)
@@ -65,26 +65,26 @@ public class RoomsController : BaseApiController
         return Ok(room);
     }
 
-    [HttpDelete("{roomId}/deletetask/{taskId}")]
-    public async Task<ActionResult> DeleteTaskAsync(int taskId, int roomId)
+    [HttpDelete("/deletetask/{taskId}")]
+    public async Task<ActionResult> DeleteTaskAsync(int taskId)  // Deletes an task by its id
     {
-        var room = await _context.Rooms.FirstOrDefaultAsync(x => x.Id == roomId);
+        var taskToDelete = await _context.Tasks.FirstOrDefaultAsync(e => e.Id == taskId);
 
-        if (room == null)
+        if (taskToDelete != null)
+        {
+            _context.Tasks.Remove(taskToDelete); 
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+        else
         {
             return BadRequest(new ApiResponse(404));
         }
-
-        // var taskToDelete = _context.Rooms.;
-        
-        // room.TasksList.Remove(taskToDelete);
-        await _context.SaveChangesAsync();
-        return Ok();
     }
 
     [Authorize]
     [HttpPost("createroom")]
-    public async Task<ActionResult<Room>> CreateRoomAsync(RoomDto request)
+    public async Task<ActionResult<Room>> CreateRoomAsync(RoomDto request) // Creates room. Requires just a name for the room from user
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
         AppUser user = null; 
@@ -106,7 +106,7 @@ public class RoomsController : BaseApiController
     }
 
     [HttpPost("adduser/{roomId}")]
-    public async Task<ActionResult> AddMemberAsync([FromQuery]string email, int roomId)
+    public async Task<ActionResult> AddMemberAsync([FromQuery]string email, int roomId) // Adds a member to room by its email. Needs member email and room id.
     {
         var room = await _context.Rooms.FirstOrDefaultAsync(x => x.Id == roomId);
 
@@ -126,10 +126,11 @@ public class RoomsController : BaseApiController
     }
 
     [HttpPost("{roomId}/addtask")]
-    public async Task<ActionResult> AddTaskAsync(int roomId, [FromBody]TasksDto task)
+    public async Task<ActionResult> AddTaskAsync(int roomId, [FromBody]TasksDto task) // Add task to an existing room. Requires  room id an Title, description and deadline.
     {
         var room = await _context.Rooms.FirstOrDefaultAsync(x => x.Id == roomId);
         var taskToAdd = _mapper.Map<TasksDto, RoomTask>(task);
+        taskToAdd.IsDone = false;
         room.TasksList.Add(taskToAdd);
         
         await _context.SaveChangesAsync();
@@ -137,10 +138,9 @@ public class RoomsController : BaseApiController
     }
     
     
-
-
-    [HttpDelete("delete/{id}")]
-    public async Task<ActionResult> DeleteRoomAsync(int id)
+    
+    [HttpDelete("delete/{id}")] 
+    public async Task<ActionResult> DeleteRoomAsync(int id) // Deletes a room by its id
     {
         var roomToDelete = await _context.Rooms.FindAsync(id);
 

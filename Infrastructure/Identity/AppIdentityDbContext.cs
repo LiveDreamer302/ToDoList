@@ -13,9 +13,13 @@ public class AppIdentityDbContext : IdentityDbContext<AppUser>
     }
 
     public DbSet<Room> Rooms { get; set; }
+    public DbSet<RoomTask> Tasks { get; set; }
+    
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.Entity<Room>()
+            .HasKey(x => x.Id);
+        builder.Entity<RoomTask>()
             .HasKey(x => x.Id);
         base.OnModelCreating(builder);
     }
