@@ -1,33 +1,53 @@
-import React, {useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import NavbarMy from "../components/navbar";
 import Footer from "../components/footer";
 import './rooms.css'
+import {Context} from "../index";
+import {Room} from "../UNIT/models/IRooms";
+import {set} from "mobx";
+import {Link, useNavigate} from "react-router-dom";
+import room from "../Room/Room";
 
 interface typeUserData {
     username: string,
     userRooms: string[]
 }
 
-const RoomsPage = ({userData}: { userData: typeUserData }) => {
-
+const RoomsPage = () => {
     const [searchInput, setSearchInput] = useState("");
     const [searchResults, setSearchResults] = useState<string[]>([]);
-
+    const {store} = useContext(Context)
+    const [rooms, setRooms] = useState<Room[]>([])
+    const navigate = useNavigate()
+    async function fetchRooms() {
+        try {
+            const response = await store.getRoomsFromServer()
+            setRooms(response)
+        } catch (e){
+            console.log('Error', e)
+        }
+    }
+    useEffect(()=> {
+        if(!localStorage.getItem("token")){
+            return navigate('/login')
+        }
+        fetchRooms()
+    }, [])
     const handleSearch = () => {
         // Add your search logic here, and update searchResults as needed
     };
-
+    // console.log(room    )
     return (
         <>
             <NavbarMy/>
             <div className="main container mt-4 h">
-                <h1>Добро пожаловать, {userData.username}!</h1>
+                <h1>Добро пожаловать, {localStorage.getItem("displayName")}!</h1>
                 <div className="row">
                     <div className="col-md-6">
                         <h3>Ваши комнаты</h3>
                         <ul>
-                            {userData.userRooms.map((room: string, index: number) => (
-                                <li key={index}>{room}</li>
+                            {rooms.map((room: any, index: number) => (
+                                <li key={index}><Link to={`/room/${room.roomId}`}> {room.roomName}</Link></li>
                             ))}
                         </ul>
                     </div>
