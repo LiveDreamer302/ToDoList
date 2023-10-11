@@ -1,41 +1,33 @@
 {
   "format": 1,
   "restore": {
-    "C:\\netprojects\\ToDoApp\\API\\API.csproj": {}
+    "D:\\PROJECT WITH STEFAN\\ToDoList\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\netprojects\\ToDoApp\\API\\API.csproj": {
+    "D:\\PROJECT WITH STEFAN\\ToDoList\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\netprojects\\ToDoApp\\API\\API.csproj",
+        "projectUniqueName": "D:\\PROJECT WITH STEFAN\\ToDoList\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\netprojects\\ToDoApp\\API\\API.csproj",
-        "packagesPath": "C:\\Users\\stefa\\.nuget\\packages\\",
-        "outputPath": "C:\\netprojects\\ToDoApp\\API\\obj\\",
+        "projectPath": "D:\\PROJECT WITH STEFAN\\ToDoList\\API\\API.csproj",
+        "packagesPath": "C:\\Users\\Boss Of The Gym\\.nuget\\packages\\",
+        "outputPath": "D:\\PROJECT WITH STEFAN\\ToDoList\\API\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\stefa\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Boss Of The Gym\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\netprojects\\ToDoApp\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "C:\\netprojects\\ToDoApp\\Infrastructure\\Infrastructure.csproj"
+              "D:\\PROJECT WITH STEFAN\\ToDoList\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "D:\\PROJECT WITH STEFAN\\ToDoList\\Infrastructure\\Infrastructure.csproj"
               }
             }
           }
@@ -100,33 +92,26 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\netprojects\\ToDoApp\\Core\\Core.csproj": {
+    "D:\\PROJECT WITH STEFAN\\ToDoList\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\netprojects\\ToDoApp\\Core\\Core.csproj",
+        "projectUniqueName": "D:\\PROJECT WITH STEFAN\\ToDoList\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\netprojects\\ToDoApp\\Core\\Core.csproj",
-        "packagesPath": "C:\\Users\\stefa\\.nuget\\packages\\",
-        "outputPath": "C:\\netprojects\\ToDoApp\\Core\\obj\\",
+        "projectPath": "D:\\PROJECT WITH STEFAN\\ToDoList\\Core\\Core.csproj",
+        "packagesPath": "C:\\Users\\Boss Of The Gym\\.nuget\\packages\\",
+        "outputPath": "D:\\PROJECT WITH STEFAN\\ToDoList\\Core\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\stefa\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Boss Of The Gym\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -166,41 +151,34 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\netprojects\\ToDoApp\\Infrastructure\\Infrastructure.csproj": {
+    "D:\\PROJECT WITH STEFAN\\ToDoList\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\netprojects\\ToDoApp\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "D:\\PROJECT WITH STEFAN\\ToDoList\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\netprojects\\ToDoApp\\Infrastructure\\Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\stefa\\.nuget\\packages\\",
-        "outputPath": "C:\\netprojects\\ToDoApp\\Infrastructure\\obj\\",
+        "projectPath": "D:\\PROJECT WITH STEFAN\\ToDoList\\Infrastructure\\Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\Boss Of The Gym\\.nuget\\packages\\",
+        "outputPath": "D:\\PROJECT WITH STEFAN\\ToDoList\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\stefa\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Boss Of The Gym\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\netprojects\\ToDoApp\\Core\\Core.csproj": {
-                "projectPath": "C:\\netprojects\\ToDoApp\\Core\\Core.csproj"
+              "D:\\PROJECT WITH STEFAN\\ToDoList\\Core\\Core.csproj": {
+                "projectPath": "D:\\PROJECT WITH STEFAN\\ToDoList\\Core\\Core.csproj"
               }
             }
           }
@@ -248,7 +226,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
