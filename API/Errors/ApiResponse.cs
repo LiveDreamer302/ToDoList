@@ -21,6 +21,7 @@ public class ApiResponse
             401 => "Nah bro, u need to be signed in to do this one",
             404 => "What u looking for? We dont have it",
             500 => "Man sorry. Our mistake",
+            444 => "Wrong email here",
             _ => null
         };
     }
