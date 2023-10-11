@@ -65,27 +65,6 @@ public class RoomsController : BaseApiController
         return Ok(room);
     }
 
-    [HttpGet("{userId}")]
-    public async Task<ActionResult<Room>> GetRoomsForUserAsync(string userId)
-    {
-        // var user = _context.Users.FirstOrDefaultAsync(x => x.Id == userId);
-    
-        var room = await _context.Rooms
-            .Where(r => r.AppUsers.Any(appUser => appUser.Id == userId))
-            .Include(r => r.AppUsers)
-            .Include(r => r.TasksList)
-            .Select(r => new
-            {
-                RoomId = r.Id,
-                RoomName = r.Name,
-                AppUsers = r.AppUsers.Select(appUser => _mapper.Map<RoomUserDto>(appUser)).ToList(),
-                Tasks = r.TasksList
-            })
-            .ToListAsync();
-
-        return Ok(room);
-    }
-
     [HttpDelete("deletetask/{taskId}")]
     public async Task<ActionResult> DeleteTaskAsync(int taskId)  // Deletes an task by its id
     {
@@ -131,21 +110,14 @@ public class RoomsController : BaseApiController
     {
         var room = await _context.Rooms.FirstOrDefaultAsync(x => x.Id == roomId);
 
-        if (room == null)
-        {
-            return StatusCode(400, new ApiResponse(400));
-        }
-
         var user = await _context.Users.FirstOrDefaultAsync(x => x.Email == email);
-
-        if (user == null) return NotFound(new ApiResponse(444));
         
         room.AppUsers.Add(user);
 
         try
         {
             await _context.SaveChangesAsync();
-            return Ok();
+            return Ok(room); 
         }
         catch (DbUpdateException)
         {
