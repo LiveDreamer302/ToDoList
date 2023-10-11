@@ -134,6 +134,7 @@ public class RoomsController : BaseApiController
         if (room == null)
         {
             return StatusCode(400, new ApiResponse(400));
+            // returning bad request
         }
 
         var user = await _context.Users.FirstOrDefaultAsync(x => x.Email == email);
