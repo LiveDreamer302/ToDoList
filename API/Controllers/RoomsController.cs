@@ -46,7 +46,7 @@ public class RoomsController : BaseApiController
         return Ok(room);
     }
 
-    [HttpGet("/room/{roomId}")]
+    [HttpGet("room/{roomId}")]
     public async Task<ActionResult<Room>> GetRoomByIdAsync(int roomId) // Returns a room by id. Will be usefull when entering in an specific room to view tasks
     {
         var room = await _context.Rooms
@@ -65,7 +65,7 @@ public class RoomsController : BaseApiController
         return Ok(room);
     }
 
-    [HttpDelete("/deletetask/{taskId}")]
+    [HttpDelete("deletetask/{taskId}")]
     public async Task<ActionResult> DeleteTaskAsync(int taskId)  // Deletes an task by its id
     {
         var taskToDelete = await _context.Tasks.FirstOrDefaultAsync(e => e.Id == taskId);
