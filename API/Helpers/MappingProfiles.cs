@@ -14,5 +14,6 @@ public class MappingProfiles : Profile
             .ForMember(dest => dest.DisplayName, opt => opt.MapFrom(src => src.DisplayName))
             .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email));
         CreateMap<RoomTask, TasksDto>().ReverseMap();
+        CreateMap<Room, RoomsForUserDto>();
     }
 }

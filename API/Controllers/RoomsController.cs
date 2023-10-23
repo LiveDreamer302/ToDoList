@@ -86,6 +86,30 @@ public class RoomsController : BaseApiController
         return Ok(room);
     }
 
+    [HttpGet("rooms/foruser/{userEmail}")]
+    public async Task<ActionResult<IEnumerable<Room>>> GetRoomsForUser(string userEmail)
+    {
+        var user = await _context.Users.SingleOrDefaultAsync(x => x.Email == userEmail);
+
+        if (user == null)
+        {
+            return NotFound(new ApiResponse(404, "User not found."));
+        }
+
+        var rooms = await _context.Rooms.Include(r => r.AppUsers)
+            .Include(r => r.TasksList)
+            .Select(r => new
+            {
+                RoomId = r.Id,
+                RoomName = r.Name,
+                AppUsers = r.AppUsers.Select(appUser => _mapper.Map<RoomUserDto>(appUser)).ToList(),
+                Tasks = r.TasksList
+            })
+            .ToListAsync();;
+
+        return Ok(rooms);
+    }
+
     [HttpDelete("deletetask/{taskId}")]
     public async Task<ActionResult> DeleteTaskAsync(int taskId)  // Deletes an task by its id
     {
