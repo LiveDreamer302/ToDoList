@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "w2VyqJGgoB37om5+ih//J+h+JwSdCYjVxWAg1F1GNkXHTaQHFV4uIVxf7XrjXwXYPdsi14fhtEh8ca4laSNn7g==",
+  "dgSpecHash": "bsyZisUARJawqcVJ4SgpA9BUlxuku0jVAKuK7h1MrbKJ1fBgVtUbpW+UxZhG7tmyYunumm+lq09ttfL9Q4ZSfg==",
   "success": true,
   "projectFilePath": "C:\\netprojects\\ToDoApp\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -62,5 +62,16 @@
     "C:\\Users\\stefa\\.nuget\\packages\\system.text.encodings.web\\4.7.2\\system.text.encodings.web.4.7.2.nupkg.sha512",
     "C:\\Users\\stefa\\.nuget\\packages\\system.text.json\\4.7.2\\system.text.json.4.7.2.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1902",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'System.IdentityModel.Tokens.Jwt' 6.32.2 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-59j7-ghrg-fj52",
+      "libraryId": "System.IdentityModel.Tokens.Jwt",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    }
+  ]
 }

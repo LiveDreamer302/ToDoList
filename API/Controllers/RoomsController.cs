@@ -127,6 +127,34 @@ public class RoomsController : BaseApiController
         }
     }
 
+    [HttpDelete("room/{roomId}/deleteuser")]
+    public async Task<ActionResult> DeleteUserFromRoomAsync(int roomId, [FromQuery] string email)
+    {
+        var user = await _context.Users.SingleOrDefaultAsync(x => x.Email == email);
+        if (user == null)
+        {
+            return BadRequest(new ApiResponse(400, "User with email " + email + " does not exist!"));
+        }
+
+        var room = await _context.Rooms.Include(x => x.AppUsers).FirstOrDefaultAsync(x => x.Id == roomId);
+
+        if (room == null)
+        {
+            return BadRequest(new ApiResponse(400, "Room with id " + roomId + " does not exists"));
+        }
+
+        var userRoom = user.Rooms.ToList();
+
+        if (!userRoom.Contains(room))
+        {
+            return NotFound(new ApiResponse(404, "User is not in this room"));
+        }
+
+        room.AppUsers.Remove(user); 
+        await _context.SaveChangesAsync(); 
+        return Ok();
+    }
+
     [Authorize]
     [HttpPost("createroom")]
     public async Task<ActionResult<Room>> CreateRoomAsync(RoomDto request) // Creates room. Requires just a name for the room from user
